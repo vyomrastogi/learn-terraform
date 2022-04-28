@@ -1,5 +1,5 @@
 variable "filename" {
-  default = "/Users/vr/Desktop/code/terraform/results/local_pets/pets.txt"
+  default = "../results/local_pets/pets.txt"
 }
 variable "prefix" {
   default = "Mr"
