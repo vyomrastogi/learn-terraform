@@ -2,11 +2,22 @@ resource "local_file" "pet" {
     filename = var.filename
     content = var.content
     file_permission = "0700"
+
+    //first creates the resource before deleting
+    lifecycle {
+      create_before_destroy = true
+    }
 }
 
 resource "random_pet" "my_pet" {
     prefix = var.prefix
     separator = var.separator
     length = var.length
+
+    //resource can still be destroyed using terraform destroy command
+    lifecycle {
+      prevent_destroy = false
+      ignore_changes = all
+    }
   
 }
