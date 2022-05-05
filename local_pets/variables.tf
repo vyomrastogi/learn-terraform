@@ -13,3 +13,6 @@ variable "length" {
 variable "content" {
   default = "We love all Pets!"
 }
+variable "dogsFile" {
+  default = "../results/local_pets/dogs.txt"
+}

@@ -21,3 +21,15 @@ resource "random_pet" "my_pet" {
     }
   
 }
+
+//Create pet from a local file as datasource
+
+data "local_file" "inputData" {
+  
+  filename = "input_data.txt"
+}
+
+resource "local_file" "dogs" {
+  filename = var.dogsFile
+  content = data.local_file.inputData.content
+}
