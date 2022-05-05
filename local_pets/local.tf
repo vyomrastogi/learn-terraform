@@ -30,6 +30,29 @@ data "local_file" "inputData" {
 }
 
 resource "local_file" "dogs" {
-  filename = var.dogsFile
+  filename = var.dogsFile[count.index]
   content = data.local_file.inputData.content
+  count = length(var.dogsFile)
 }
+
+output "dog_files" {
+  value = local_file.dogs
+  sensitive = true
+}
+
+
+//TODO : 
+// Understand why this error comes up 
+# │ Error: Output refers to sensitive values
+# │
+# │   on local.tf line 38:
+# │   38: output "dog_files" {
+# │
+# │ To reduce the risk of accidentally exporting sensitive data that was     
+# │ intended to be only internal, Terraform requires that any root module    
+# │ output containing sensitive data be explicitly marked as sensitive, to   
+# │ confirm your intent.
+# │
+# │ If you do intend to export this data, annotate the output value as       
+# │ sensitive by adding the following argument:
+# │     sensitive = true
