@@ -21,3 +21,12 @@ variable "dogsFile" {
     "../results/local_pets/husky.txt"
   ]
 }
+variable "doggosFile" {
+  type = list(string)
+  default = [
+    "../results/local_pets/pug_doggos.txt",
+    "../results/local_pets/poodle_doggos.txt",
+    "../results/local_pets/retriever_doggos.txt",
+    "../results/local_pets/husky_doggos.txt"
+  ]
+}

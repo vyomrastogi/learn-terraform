@@ -32,12 +32,27 @@ data "local_file" "inputData" {
 resource "local_file" "dogs" {
   filename = var.dogsFile[count.index]
   content = data.local_file.inputData.content
-  count = length(var.dogsFile)
+  #count creates multiple instances of specified resource 
+  #length function returns size of list
+  count = length(var.dogsFile) 
 }
 
 output "dog_files" {
   value = local_file.dogs
   sensitive = true
+}
+
+output "doggos_files" {
+  value = local_file.doggos
+  sensitive = true
+}
+
+resource "local_file" "doggos" {
+  #file name 'for' each entry in set/map 
+  filename = each.value
+  content = data.local_file.inputData.content
+  #for_each works only with map type and set type
+  for_each = toset(var.doggosFile)
 }
 
 
